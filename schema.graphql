@@ -1,0 +1,40 @@
+type Factory @entity {
+  # address
+  id: ID!
+}
+
+type Auction @entity {
+  # address
+  id: ID!
+  factory: Factory!
+  owner: Bytes!
+  blockStart: BigInt!
+  tokenBase: Bytes!
+  tokenQuote: Bytes!
+  amountBase: BigInt!
+  initialPrice: BigInt!
+  halvingPeriod: BigInt!
+  swapPeriod: BigInt!
+}
+
+type Init @entity {
+  # transaction hash + "-" + log index
+  id: ID!
+  auction: Auction!
+}
+
+type Swap @entity {
+  # transaction hash + "-" + log index
+  id: ID!
+  auction: Auction!
+  buyer: Bytes!
+  buyAmount: BigInt!
+  sellAmount: BigInt!
+}
+
+type Withdraw @entity {
+  # transaction hash + "-" + log index
+  id: ID!
+  auction: Auction!
+  amount: BigInt!
+}

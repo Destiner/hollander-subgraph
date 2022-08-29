@@ -1,0 +1,61 @@
+specVersion: 0.0.4
+description: Hollander is a protocol for continious token swaps
+repository: https://github.com/Destiner/hollander-subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Factory
+    network: goerli
+    source:
+      address: '0x613603a1158A7f31bb73309F89745cd096a3938f'
+      abi: Factory
+      startBlock: 7492881
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: ./src/mappings/factory.ts
+      entities:
+        - Factory
+        - Auction
+      abis:
+        - name: Factory
+          file: ./abis/factory.json
+        - name: ERC20
+          file: ./abis/erc20.json
+        - name: Auction
+          file: ./abis/auction.json
+      eventHandlers:
+        - event: NewAuction(address,indexed address,indexed address,indexed address,uint256,uint256,uint256,uint256)
+          handler: handleNewAuction
+templates:
+  - kind: ethereum/contract
+    name: Auction
+    network: goerli
+    source:
+      abi: Auction
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: ./src/mappings/auction.ts
+      entities:
+        - Auction
+        - Init
+        - Swap
+        - Withdraw
+      abis:
+        - name: Auction
+          file: ./abis/auction.json
+        - name: Factory
+          file: ./abis/factory.json
+        - name: ERC20
+          file: ./abis/erc20.json
+      eventHandlers:
+        - event: Init(uint256)
+          handler: handleInit
+        - event: Swap(indexed address,uint256,uint256)
+          handler: handleSwap
+        - event: Withdraw(uint256)
+          handler: handleWithdraw

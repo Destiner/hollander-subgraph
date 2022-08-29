@@ -1,0 +1,24 @@
+{
+  "name": "hollander-subgraph",
+  "version": "0.1.0",
+  "scripts": {
+    "codegen": "graph codegen --output-dir src/types/",
+    "build": "graph build",
+    "deploy:goerli": "graph deploy destiner/hollander-goerli subgraph.yaml --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
+    "lint": "npm run lint:prettier && npm run lint:eslint",
+    "lint:prettier": "prettier -c \"src/**/*.{json,ts}\"",
+    "lint:eslint": "eslint \"src/**/*.ts\"",
+    "typecheck": "npx tsc --noEmit"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "^0.33.0",
+    "@graphprotocol/graph-ts": "^0.27.0",
+    "@types/node": "^18.7.13",
+    "@typescript-eslint/eslint-plugin": "^5.35.1",
+    "@typescript-eslint/parser": "^5.35.1",
+    "eslint": "^8.23.0",
+    "eslint-import-resolver-typescript": "^3.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "prettier": "^2.7.1"
+  }
+}
