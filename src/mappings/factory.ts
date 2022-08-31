@@ -5,9 +5,14 @@ function handleNewAuction(event: NewAuction): void {
   let factory = Factory.load(event.address.toString());
   if (!factory) {
     factory = new Factory(event.address.toString());
+    factory.count = 0;
+    factory.save();
   }
+  factory.count++;
+  factory.save();
 
-  let auction = new Auction(event.params.auction.toString());
+  let auction = new Auction(factory.count.toString());
+  auction.address = event.params.auction;
   auction.owner = event.params.owner;
   auction.tokenBase = event.params.tokenBase;
   auction.tokenQuote = event.params.tokenQuote;
