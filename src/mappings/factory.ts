@@ -1,5 +1,6 @@
 import { NewAuction } from '../types/Factory/Factory';
 import { Auction, Factory } from '../types/schema';
+import { Auction as AuctionTemplate } from '../types/templates';
 
 function handleNewAuction(event: NewAuction): void {
   let factory = Factory.load(event.address.toString());
@@ -21,6 +22,8 @@ function handleNewAuction(event: NewAuction): void {
   auction.halvingPeriod = event.params.halvingPeriod;
   auction.swapPeriod = event.params.swapPeriod;
   auction.save();
+
+  AuctionTemplate.create(event.params.auction);
 }
 
 // eslint-disable-next-line import/prefer-default-export
