@@ -6,9 +6,8 @@ type Factory @entity {
 }
 
 type Auction @entity {
-  # auction number
+  # auction address
   id: ID!
-  address: Bytes!
   factory: Factory!
   owner: Bytes!
   blockStart: BigInt!

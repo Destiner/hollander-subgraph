@@ -6,7 +6,7 @@ import {
 } from '../types/templates/Auction/Auction';
 
 function handleInit(event: InitEvent): void {
-  let auction = Auction.load(event.address.toString());
+  let auction = Auction.load(event.address.toHexString());
   if (!auction) {
     return;
   }
@@ -19,7 +19,7 @@ function handleInit(event: InitEvent): void {
 }
 
 function handleSwap(event: SwapEvent): void {
-  let auction = Auction.load(event.address.toString());
+  let auction = Auction.load(event.address.toHexString());
   if (!auction) {
     return;
   }
@@ -35,7 +35,7 @@ function handleSwap(event: SwapEvent): void {
 }
 
 function handleWithdraw(event: WithdrawEvent): void {
-  let auction = Auction.load(event.address.toString());
+  let auction = Auction.load(event.address.toHexString());
   if (!auction) {
     return;
   }
