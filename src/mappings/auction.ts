@@ -10,6 +10,8 @@ function handleInit(event: InitEvent): void {
   if (!auction) {
     return;
   }
+  auction.blockInit = event.block.number;
+  auction.save();
 
   let eventId =
     event.transaction.hash.toString() + '-' + event.logIndex.toString();

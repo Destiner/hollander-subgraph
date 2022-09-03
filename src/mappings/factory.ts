@@ -17,7 +17,8 @@ function handleNewAuction(event: NewAuction): void {
   let auction = new Auction(event.params.auction.toHexString());
   auction.factory = event.address.toHexString();
   auction.owner = event.params.owner;
-  auction.blockStart = BigInt.zero();
+  auction.blockCreated = event.block.number;
+  auction.blockInit = BigInt.zero();
   auction.tokenBase = event.params.tokenBase;
   auction.tokenQuote = event.params.tokenQuote;
   auction.amountBase = event.params.amountBase;

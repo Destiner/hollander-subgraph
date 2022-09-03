@@ -10,7 +10,8 @@ type Auction @entity {
   id: ID!
   factory: Factory!
   owner: Bytes!
-  blockStart: BigInt!
+  blockCreated: BigInt!
+  blockInit: BigInt!
   tokenBase: Bytes!
   tokenQuote: Bytes!
   amountBase: BigInt!
