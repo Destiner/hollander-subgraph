@@ -5,9 +5,9 @@ import { Auction, Factory } from '../types/schema';
 import { Auction as AuctionTemplate } from '../types/templates';
 
 function handleNewAuction(event: NewAuction): void {
-  let factory = Factory.load(event.address.toString());
+  let factory = Factory.load(event.address.toHexString());
   if (!factory) {
-    factory = new Factory(event.address.toString());
+    factory = new Factory(event.address.toHexString());
     factory.count = 0;
     factory.save();
   }
